@@ -83,13 +83,16 @@ h1{margin:0;font-size:0}
 
 <script>
 // Where each item sits when worn, in doll-base.png pixels (1090 × 1443).
+// Molly is drawn in 12px blocks; item images use the same 12px blocks, so keep
+// x ≡ 10 and y ≡ 0 (mod 12) and widths a multiple of 12 or the pixels won't line up.
+// (The tee was drawn on Molly's own canvas, so it keeps its original spot.)
 // z = stacking order on the doll: base 0, hair-front 4 (hair falls over everything but the hat).
 const DOLL_W = 1090, DOLL_H = 1443;
 const ITEMS = [
-  { id: 'hat',    name: 'pink cowboy hat', src: 'assets/items/hat.png',    x: 270, y: -35,  w: 550, z: 5 },
+  { id: 'hat',    name: 'pink cowboy hat', src: 'assets/items/hat.png',    x: 274, y: -36,  w: 552, z: 5 },
   { id: 'tee',    name: 'black tee',       src: 'assets/items/tee.png',    x: 194, y: 390,  w: 701, z: 1 },
-  { id: 'jacket', name: 'camo jacket',     src: 'assets/items/jacket.png', x: 198, y: 388,  w: 704, z: 3 },
-  { id: 'boots',  name: 'buckle boots',    src: 'assets/items/boots.png',  x: 376, y: 1090, w: 352, z: 2 },
+  { id: 'jacket', name: 'camo jacket',     src: 'assets/items/jacket.png', x: 202, y: 384,  w: 708, z: 3 },
+  { id: 'boots',  name: 'buckle boots',    src: 'assets/items/boots.png',  x: 334, y: 1104, w: 444, z: 2 },
 ];
 
 const doll = document.getElementById('doll');
