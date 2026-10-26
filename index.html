@@ -1,18 +1,256 @@
 <!doctype html>
-<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MOLLY</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5a0a7">
+<title>MOLLY</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#ed8d9e url("assets/pink-room.jpg") center top / 100% 100svh scroll no-repeat;color:#493b3d;font:16px Georgia,serif;min-height:100vh}main{max-width:940px;margin:auto;padding:20px}header{text-align:center}h1{font:900 clamp(48px,10vw,76px)/1.15 Georgia,serif;letter-spacing:.1em;margin:8px 0 18px;color:#e85c9e;background-color:#e85c9e;background-image:radial-gradient(circle,#fff 0 1px,transparent 1.8px),radial-gradient(circle,#ffe0f0 0 1px,transparent 2px),linear-gradient(125deg,#b92068,#ffb6db 35%,#de3b87 55%,#ffd8ec 72%,#c12a72);background-size:7px 9px,11px 7px,100% 100%;background-position:0 0,4px 3px,0 0;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 #a93e70) drop-shadow(0 0 5px #f5a4cb)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.board{position:relative;width:100%;max-width:760px;aspect-ratio:1.15;margin:20px auto 0;isolation:isolate;user-select:none}.stage{position:absolute;left:0;top:0;width:60%;aspect-ratio:1090/1443;pointer-events:none}.stage img{position:absolute;width:100%;height:100%;inset:0;image-rendering:pixelated}.base{z-index:0}.front{z-index:2}.hair-left{clip-path:polygon(34% 25%,41% 25%,42% 28%,41% 35%,40% 40%,38.5% 47%,38% 52%,36% 59%,35% 62%,30% 62%,28% 59%,29.5% 52%,31% 45%,32.5% 38%,33.5% 30%)}.hair-right{clip-path:polygon(59% 25%,67% 25%,68.5% 30%,69.5% 38%,71% 45%,72% 52%,73% 60%,67% 62%,65% 59%,64% 52%,63% 47%,61.5% 40%,60% 35%,59% 28%)}.clothing{position:absolute;z-index:1;cursor:grab;touch-action:none;outline:none}.fabric{position:absolute;inset:0;overflow:hidden;pointer-events:none}.fabric img{position:absolute;image-rendering:pixelated;pointer-events:none}.hat{width:30%;height:15.75%;left:62%;top:2%;z-index:3}.hat img{width:307%;height:256%;left:-3%;top:-88.3%}.boots{width:28%;height:28%;left:72%;top:58%;z-index:3}.boots img{width:132.9%;height:151.5%;left:-15%;top:-25.4%}.jacket{width:48%;height:36.7%;left:53%;top:24%}.jacket .fabric{clip-path:polygon(0 0,42% 0,42% 24%,58% 24%,58% 0,100% 0,100% 100%,0 100%)}.jacket img{width:269.5%;height:144.4%;left:-168.4%;top:-18.8%}.kitty{width:17%;height:24%;left:42%;top:68%;z-index:4}.kitty img{width:100%;height:100%;left:0;top:0;object-fit:contain}.clothing:focus-visible{outline:2px dashed #b45e8c;outline-offset:5px}.clothing.dragging{cursor:grabbing}body.dragging{user-select:none}@media(max-width:600px){main{padding:12px 6px}h1{font-size:52px}.kitty{width:25%;height:17%;left:73%;top:43%}.board{aspect-ratio:.53}.stage{width:80%;left:10%}.hat{width:40%;height:9.9%;left:41%;top:59%}.boots{width:37.3%;height:15.4%;left:3%;top:77%}.jacket{width:64%;height:23.8%;left:36%;top:75%}}
-.title-art{display:block;width:min(75vw,360px);height:80px;object-fit:contain;margin:auto}h1{background:none;filter:none;margin:0 0 18px;font-size:0}.board{--ground:86vh;height:max(820px,calc(100svh - 125px));aspect-ratio:auto}.stage{top:calc(var(--ground) - 100px - min(60vw,456px) * 1.324)}.kitty{top:calc(var(--ground) - 100px - 145px);height:145px}.hat{top:78%}.boots{top:82%;height:170px}.jacket{top:79%;height:235px}@media(max-width:600px){.title-art{height:64px}.board{--ground:89svh;height:max(820px,calc(100svh - 105px));aspect-ratio:auto}.stage{top:calc(var(--ground) - 100px - 80vw * 1.324 + 16px)}.kitty{top:calc(var(--ground) - 100px - 96px + 12px);height:96px}.hat{top:70%;height:74px}.boots{top:81%;height:110px}.jacket{top:79%;height:170px}}
-@media(min-width:601px){body{background-size:100% 100svh}.stage{width:40%;left:10%;top:calc(var(--ground) - 100px - min(40vw,304px) * 1.324)}.hat{width:20%;height:70px}.jacket{width:32%;height:165px}.boots{width:18.7%;height:115px}}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:#ed8d9e;color:#493b3d;font:16px Georgia,serif;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}
+img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* one phone-shaped column; on wide screens it just sits in the middle */
+.game{display:flex;flex-direction:column;height:100vh;height:100svh;min-height:520px;max-width:min(100%,calc(100svh * .78));margin:0 auto;position:relative;background:#f5a0a7;box-shadow:0 0 0 3px #493b3d}
+header{flex:none;padding:max(4px,env(safe-area-inset-top)) 8px 0;text-align:center;background:#f5a0a7;position:relative;z-index:5}
+h1{margin:0;font-size:0}
+.title-art{display:block;height:clamp(40px,8svh,64px);width:auto;max-width:80%;margin:4px auto;image-rendering:pixelated}
+
+/* the room: the background is cropped, never stretched; things are placed using --ih (rendered image height) */
+.stage{flex:1 1 auto;min-height:0;position:relative;overflow:hidden;container-type:size;touch-action:none}
+.room{position:absolute;inset:0;background:url("assets/pink-room.jpg") center bottom / cover no-repeat;image-rendering:pixelated}
+.stage>*{--ih:max(100cqh,calc(100cqw * 1.3278))}
+.doll{position:absolute;left:50%;bottom:calc(var(--ih) * .075);height:min(calc(var(--ih) * .68),calc(100cqh - var(--ih) * .075 - 20px));aspect-ratio:1090/1443;transform:translateX(-50%);touch-action:none}
+.doll img{position:absolute;image-rendering:pixelated;pointer-events:none}
+.doll .base,.doll .hair{inset:0;width:100%;height:100%}
+.doll .base{z-index:0}.doll .hair{z-index:4}
+.worn{animation:pop .22s ease-out}
+@keyframes pop{0%{transform:scale(1.08)}100%{transform:none}}
+.kitty{position:absolute;height:calc(var(--ih) * .15);aspect-ratio:1202/1309;left:76%;bottom:calc(var(--ih) * .06);cursor:grab;touch-action:none;z-index:6;outline:none}
+.kitty img{width:100%;height:100%;image-rendering:pixelated;pointer-events:none}
+.kitty.hop{animation:hop .35s ease-out}
+@keyframes hop{40%{transform:translateY(-18%)}}
+.kitty:focus-visible{outline:2px dashed #493b3d;outline-offset:3px}
+
+/* the closet shelf: always on screen */
+.shelf{flex:none;position:relative;z-index:5;background:#fbd3dc;border-top:3px solid #493b3d;padding:6px 8px max(8px,env(safe-area-inset-bottom))}
+.hint{margin:0 0 5px;text-align:center;font-size:14px;font-style:italic;opacity:.75}
+.slots{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:6px;align-items:stretch}
+.slot{position:relative;display:grid;place-items:center;min-height:clamp(58px,10svh,84px);padding:6px;border:3px solid #493b3d;border-radius:10px;background:#fff3f6;box-shadow:0 3px 0 #493b3d;cursor:grab;touch-action:none;font:inherit;color:inherit}
+.slot img{max-width:100%;max-height:clamp(42px,8svh,68px);object-fit:contain;image-rendering:pixelated;pointer-events:none}
+.slot[aria-pressed="true"]{background:#f7b9c9;box-shadow:none;transform:translateY(3px)}
+.slot[aria-pressed="true"] img{opacity:.3}
+.slot[aria-pressed="true"]::after{content:"✓";position:absolute;top:2px;right:6px;font-weight:bold}
+.reset{min-width:52px;cursor:pointer;font-size:22px;touch-action:manipulation}
+.slot:focus-visible{outline:3px dashed #493b3d;outline-offset:2px}
+
+.ghost{position:fixed;z-index:50;pointer-events:none;image-rendering:pixelated;filter:drop-shadow(0 6px 4px rgba(73,59,61,.35));transition:opacity .15s}
+.ghost.gone{opacity:0}
+.doll.target::before{content:"";position:absolute;inset:-4%;border:3px dashed rgba(255,255,255,.9);border-radius:20px}
 </style>
-<main><header><h1><img class="title-art" src="assets/molly-title.gif" alt="MOLLY"></h1></header><div class="board" id="board"><div class="stage base"><img src="assets/doll-base.png" alt="Molly"></div><div class="clothing jacket" role="button" tabindex="0" aria-label="Movable camouflage jacket"><div class="fabric"><img src="assets/accessories-v2.png" alt="" draggable="false"></div></div><div class="stage front" aria-hidden="true"><img class="hair-left" src="assets/doll-base.png" alt=""><img class="hair-right" src="assets/doll-base.png" alt=""></div><div class="clothing hat" role="button" tabindex="0" aria-label="Movable pink cowboy hat"><div class="fabric"><img src="assets/accessories-v2.png" alt="" draggable="false"></div></div><div class="clothing boots" role="button" tabindex="0" aria-label="Movable black buckle boots"><div class="fabric"><img src="assets/boots-wide.png" alt="" draggable="false"></div></div><div class="clothing kitty" role="button" tabindex="0" aria-label="Movable kitty"><div class="fabric"><img src="assets/kitty.png" alt="" draggable="false"></div></div></div></main>
+</head>
+<body>
+<div class="game">
+  <header><h1><img class="title-art" src="assets/molly-title.gif" alt="MOLLY"></h1></header>
+
+  <main class="stage" id="stage">
+    <div class="room" aria-hidden="true"></div>
+    <div class="doll" id="doll" role="img" aria-label="Molly">
+      <img class="base" src="assets/doll-base.png" alt="">
+      <img class="hair" src="assets/hair-front.png" alt="">
+    </div>
+    <div class="kitty" id="kitty" role="button" tabindex="0" aria-label="Kitty. Drag her around, or use the arrow keys."><img src="assets/kitty.png" alt=""></div>
+  </main>
+
+  <nav class="shelf" aria-label="Molly's closet">
+    <p class="hint">tap or drag clothes onto Molly ♡</p>
+    <div class="slots" id="slots">
+      <button class="slot reset" id="reset" aria-label="Take everything off">↺</button>
+    </div>
+  </nav>
+  <p class="sr-only" aria-live="polite" id="status"></p>
+</div>
+
 <script>
-const board=document.getElementById('board');
-for(const item of document.querySelectorAll('.clothing')){let drag=null;
-function place(x,y){item.style.left=x+'%';item.style.top=y+'%'}
-item.addEventListener('pointerdown',e=>{if(e.button!==0||drag)return;e.preventDefault();const rect=item.getBoundingClientRect();drag={id:e.pointerId,offsetX:e.clientX-rect.left,offsetY:e.clientY-rect.top,before:{left:item.style.left,top:item.style.top}};item.setPointerCapture(e.pointerId);item.classList.add('dragging');document.body.classList.add('dragging')});
-item.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;e.preventDefault();const rect=board.getBoundingClientRect();place((e.clientX-rect.left-drag.offsetX)/rect.width*100,(e.clientY-rect.top-drag.offsetY)/rect.height*100)});
-function release(e,cancel){if(!drag||drag.id!==e.pointerId)return;if(cancel){item.style.left=drag.before.left;item.style.top=drag.before.top}drag=null;item.classList.remove('dragging');document.body.classList.remove('dragging')}
-item.addEventListener('pointerup',e=>release(e,false));item.addEventListener('pointercancel',e=>release(e,true));item.addEventListener('lostpointercapture',e=>release(e,false));
-item.addEventListener('keydown',e=>{const moves={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]};if(!moves[e.key])return;e.preventDefault();const r=item.getBoundingClientRect(),b=board.getBoundingClientRect(),step=e.shiftKey?3:.5;place((r.left-b.left)/b.width*100+moves[e.key][0]*step,(r.top-b.top)/b.height*100+moves[e.key][1]*step)})}
-</script></html>
+// Where each item sits when worn, in doll-base.png pixels (1090 × 1443).
+// z = stacking order on the doll: base 0, hair-front 4 (hair falls over everything but the hat).
+const DOLL_W = 1090, DOLL_H = 1443;
+const ITEMS = [
+  { id: 'hat',    name: 'pink cowboy hat', src: 'assets/items/hat.png',    x: 270, y: -35,  w: 550, z: 5 },
+  { id: 'tee',    name: 'black tee',       src: 'assets/items/tee.png',    x: 194, y: 390,  w: 701, z: 1 },
+  { id: 'jacket', name: 'camo jacket',     src: 'assets/items/jacket.png', x: 198, y: 388,  w: 704, z: 3 },
+  { id: 'boots',  name: 'buckle boots',    src: 'assets/items/boots.png',  x: 376, y: 1090, w: 352, z: 2 },
+];
+
+const doll = document.getElementById('doll');
+const slots = document.getElementById('slots');
+const statusEl = document.getElementById('status');
+const worn = new Set();
+
+// saved outfit (per device; the game works fine without it)
+try { (JSON.parse(localStorage.getItem('molly-outfit')) || []).forEach(id => worn.add(id)); } catch {}
+const save = () => { try { localStorage.setItem('molly-outfit', JSON.stringify([...worn])); } catch {} };
+
+// ---- build the doll layers and the shelf ----
+for (const it of ITEMS) {
+  const img = new Image();
+  img.src = it.src;
+  img.alt = '';
+  img.style.cssText = `left:${it.x / DOLL_W * 100}%;top:${it.y / DOLL_H * 100}%;width:${it.w / DOLL_W * 100}%;z-index:${it.z};display:none`;
+  doll.appendChild(img);
+  it.layer = img;
+  // keep the pixels so a tap only grabs an item where it is actually visible
+  img.decode().then(() => {
+    const c = document.createElement('canvas');
+    c.width = img.naturalWidth; c.height = img.naturalHeight;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0);
+    it.alpha = (u, v) => ctx.getImageData(Math.min(c.width - 1, u * c.width) | 0, Math.min(c.height - 1, v * c.height) | 0, 1, 1).data[3];
+  }).catch(() => {});
+
+  const b = document.createElement('button');
+  b.className = 'slot';
+  b.innerHTML = `<img src="${it.src}" alt="">`;
+  b.setAttribute('aria-label', it.name);
+  slots.insertBefore(b, document.getElementById('reset'));
+  it.slot = b;
+}
+
+function render(changed) {
+  for (const it of ITEMS) {
+    const on = worn.has(it.id);
+    it.layer.style.display = on ? '' : 'none';
+    it.slot.setAttribute('aria-pressed', on);
+    if (it === changed) { it.layer.classList.remove('worn'); void it.layer.offsetWidth; if (on) it.layer.classList.add('worn'); }
+  }
+  save();
+}
+function setWorn(it, on) {
+  on ? worn.add(it.id) : worn.delete(it.id);
+  render(it);
+  statusEl.textContent = `Molly ${on ? 'put on' : 'took off'} the ${it.name}.`;
+}
+
+// ---- drag & tap: shelf → Molly to wear it, Molly → anywhere else to take it off ----
+const TAP = 8;
+const dollRect = () => doll.getBoundingClientRect();
+const overDoll = (x, y, pad = 0.12) => {
+  const r = dollRect(), px = r.width * pad, py = r.height * pad * 0.5;
+  return x > r.left - px && x < r.right + px && y > r.top - py && y < r.bottom + py;
+};
+function wornBox(it) {
+  const r = dollRect();
+  const W = (it.w / DOLL_W) * r.width;
+  return { L: (it.x / DOLL_W) * r.width + r.left, T: (it.y / DOLL_H) * r.height + r.top, W, H: W * it.layer.naturalHeight / it.layer.naturalWidth };
+}
+function itemAt(x, y) { // topmost worn item with visible pixels under the finger
+  return ITEMS.filter(it => worn.has(it.id)).sort((a, b) => b.z - a.z).find(it => {
+    const { L, T, W, H } = wornBox(it), u = (x - L) / W, v = (y - T) / H;
+    if (u < 0 || v < 0 || u > 1 || v > 1) return false;
+    try { return it.alpha ? it.alpha(u, v) > 40 : true; } catch { return true; } // e.g. opened from a file:// URL
+  });
+}
+
+let drag = null;
+function startDrag(e, it, fromDoll) {
+  if (e.button > 0 || drag) return;
+  e.preventDefault();
+  drag = { it, fromDoll, id: e.pointerId, x0: e.clientX, y0: e.clientY, moved: false, ghost: null };
+  e.currentTarget.setPointerCapture(e.pointerId);
+}
+function moveDrag(e) {
+  if (!drag || drag.id !== e.pointerId) return;
+  if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < TAP) return;
+  const { it } = drag;
+  if (!drag.moved) {
+    drag.moved = true;
+    const { L, T, W, H } = wornBox(it);
+    const g = drag.ghost = new Image();
+    g.src = it.src; g.className = 'ghost'; g.alt = '';
+    g.style.width = W + 'px';
+    document.body.appendChild(g);
+    if (drag.fromDoll) { // pick it up from where it sits on her
+      drag.ox = drag.x0 - L; drag.oy = drag.y0 - T;
+      it.layer.style.visibility = 'hidden';
+    } else { drag.ox = W / 2; drag.oy = H / 2; }
+  }
+  drag.ghost.style.left = e.clientX - drag.ox + 'px';
+  drag.ghost.style.top = e.clientY - drag.oy + 'px';
+  doll.classList.toggle('target', !drag.fromDoll && overDoll(e.clientX, e.clientY));
+}
+function endDrag(e, cancelled) {
+  if (!drag || drag.id !== e.pointerId) return;
+  const { it, moved, ghost, fromDoll } = drag;
+  drag = null;
+  doll.classList.remove('target');
+  it.layer.style.visibility = '';
+  if (ghost) { ghost.classList.add('gone'); setTimeout(() => ghost.remove(), 160); }
+  if (cancelled) return;
+  if (!moved) setWorn(it, !worn.has(it.id));                     // a tap toggles
+  else if (fromDoll) { if (!overDoll(e.clientX, e.clientY, 0)) setWorn(it, false); }
+  else if (overDoll(e.clientX, e.clientY)) setWorn(it, true);    // dropped on her: snaps into place
+}
+
+for (const it of ITEMS) {
+  const b = it.slot;
+  b.addEventListener('pointerdown', e => startDrag(e, it, false));
+  b.addEventListener('pointermove', moveDrag);
+  b.addEventListener('pointerup', e => endDrag(e, false));
+  b.addEventListener('pointercancel', e => endDrag(e, true));
+  b.addEventListener('click', e => { if (e.detail === 0) setWorn(it, !worn.has(it.id)); }); // keyboard Enter/Space
+}
+doll.addEventListener('pointerdown', e => { const it = itemAt(e.clientX, e.clientY); if (it) startDrag(e, it, true); });
+doll.addEventListener('pointermove', moveDrag);
+doll.addEventListener('pointerup', e => endDrag(e, false));
+doll.addEventListener('pointercancel', e => endDrag(e, true));
+
+document.getElementById('reset').addEventListener('click', () => {
+  worn.clear(); render();
+  statusEl.textContent = 'Molly is back in her tank and shorts.';
+});
+
+// ---- kitty: free to wander the room, but never off it ----
+const stage = document.getElementById('stage');
+const kitty = document.getElementById('kitty');
+let kd = null;
+function placeKitty(left, top) {
+  const s = stage.getBoundingClientRect(), k = kitty.getBoundingClientRect();
+  left = Math.max(0, Math.min(s.width - k.width, left));
+  top = Math.max(0, Math.min(s.height - k.height, top));
+  kitty.style.left = left / s.width * 100 + '%';
+  kitty.style.top = top / s.height * 100 + '%';
+  kitty.style.bottom = 'auto';
+}
+kitty.addEventListener('pointerdown', e => {
+  if (e.button > 0) return;
+  e.preventDefault();
+  const k = kitty.getBoundingClientRect();
+  kd = { id: e.pointerId, ox: e.clientX - k.left, oy: e.clientY - k.top, x0: e.clientX, y0: e.clientY };
+  kitty.setPointerCapture(e.pointerId);
+});
+kitty.addEventListener('pointermove', e => {
+  if (!kd || kd.id !== e.pointerId) return;
+  const s = stage.getBoundingClientRect();
+  placeKitty(e.clientX - s.left - kd.ox, e.clientY - s.top - kd.oy);
+});
+const kittyUp = e => {
+  if (!kd || kd.id !== e.pointerId) return;
+  if (Math.hypot(e.clientX - kd.x0, e.clientY - kd.y0) < TAP) { kitty.classList.remove('hop'); void kitty.offsetWidth; kitty.classList.add('hop'); }
+  kd = null;
+};
+kitty.addEventListener('pointerup', kittyUp);
+kitty.addEventListener('pointercancel', kittyUp);
+kitty.addEventListener('keydown', e => {
+  const m = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
+  if (!m) return;
+  e.preventDefault();
+  const s = stage.getBoundingClientRect(), k = kitty.getBoundingClientRect(), step = e.shiftKey ? 24 : 6;
+  placeKitty(k.left - s.left + m[0] * step, k.top - s.top + m[1] * step);
+});
+
+render();
+</script>
+</body>
+</html>
